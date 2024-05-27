@@ -1,0 +1,49 @@
+[gd_scene load_steps=12 format=3 uid="uid://ce4g8b8je1hn2"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_ku2tr"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="2_3kkjw"]
+[ext_resource type="Animation" uid="uid://ccds2u22gbxn7" path="res://addons/godot-xr-tools/hands/animations/right/Grip.res" id="3_eh05d"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="3_vcexo"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="3_ywfp2"]
+[ext_resource type="PackedScene" uid="uid://u3k0a120qlsn" path="res://assets/shield.gltf.glb" id="4_a6kda"]
+[ext_resource type="Animation" uid="uid://plad1r85f7ws" path="res://addons/godot-xr-tools/hands/animations/left/Grip.res" id="6_ldt3w"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lbks3"]
+height = 0.105122
+radius = 0.314751
+
+[sub_resource type="BoxMesh" id="BoxMesh_bvuba"]
+size = Vector3(0.02, 0.1, 0.01)
+
+[sub_resource type="Resource" id="Resource_fbibd"]
+script = ExtResource("3_vcexo")
+open_pose = ExtResource("3_eh05d")
+closed_pose = ExtResource("3_eh05d")
+
+[sub_resource type="Resource" id="Resource_dal17"]
+script = ExtResource("3_vcexo")
+open_pose = ExtResource("6_ldt3w")
+closed_pose = ExtResource("6_ldt3w")
+
+[node name="PickableObject" instance=ExtResource("1_ku2tr")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -0.00018669, 0, 2.25473e-06)
+shape = SubResource("CylinderShape3D_lbks3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000409484, -0.00801022, 0.0422435)
+visible = false
+mesh = SubResource("BoxMesh_bvuba")
+metadata/_edit_group_ = true
+
+[node name="GrabPointHandRight" parent="." index="2" instance=ExtResource("2_3kkjw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0689582)
+hand_pose = SubResource("Resource_fbibd")
+
+[node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("3_ywfp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0683069)
+hand_pose = SubResource("Resource_dal17")
+
+[node name="shield_gltf" parent="." index="4" instance=ExtResource("4_a6kda")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.00018669, 0, 0.0154567)

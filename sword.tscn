@@ -1,0 +1,51 @@
+[gd_scene load_steps=12 format=3 uid="uid://dvpe7xwep0jv7"]
+
+[ext_resource type="PackedScene" uid="uid://sg77it42bcbj" path="res://assets/sword_broken.gltf.glb" id="1_bbivm"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_p37ps"]
+[ext_resource type="Animation" uid="uid://ccds2u22gbxn7" path="res://addons/godot-xr-tools/hands/animations/right/Grip.res" id="3_gnt0p"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="3_oav3u"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="4_xag3o"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="5_s5wyl"]
+[ext_resource type="Animation" uid="uid://plad1r85f7ws" path="res://addons/godot-xr-tools/hands/animations/left/Grip.res" id="6_wbt5b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o85fn"]
+size = Vector3(0.1, 0.775949, 0.0813965)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2wgks"]
+size = Vector3(0.02, 0.1, 0.01)
+
+[sub_resource type="Resource" id="Resource_eah1c"]
+script = ExtResource("4_xag3o")
+open_pose = ExtResource("6_wbt5b")
+closed_pose = ExtResource("6_wbt5b")
+
+[sub_resource type="Resource" id="Resource_hlxcu"]
+script = ExtResource("4_xag3o")
+open_pose = ExtResource("3_gnt0p")
+closed_pose = ExtResource("3_gnt0p")
+
+[node name="SWORD" instance=ExtResource("1_p37ps")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(-0.00590778, 0, 0.499965, -0.140458, 0.479863, -0.0016597, -0.47983, -0.140467, -0.00566985, 0, 0.105293, -0.0405625)
+shape = SubResource("BoxShape3D_o85fn")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.959727, 0.280935, 0, -0.280935, 0.959727, 0, 0.00145249, -0.010166)
+visible = false
+mesh = SubResource("BoxMesh_2wgks")
+metadata/_edit_group_ = true
+
+[node name="sword_broken_gltf" parent="." index="2" instance=ExtResource("1_bbivm")]
+transform = Transform3D(-0.00835102, 0, 0.49993, -0.140448, 0.479863, -0.00234609, -0.479796, -0.140467, -0.0080147, 0, 0.00145249, -0.010166)
+metadata/_edit_group_ = true
+
+[node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("5_s5wyl")]
+transform = Transform3D(0.986486, 0.163842, 0, -0.163842, 0.986486, 0, 0, 0, 1, 0.0224645, 0.034723, -0.1094)
+hand_pose = SubResource("Resource_eah1c")
+
+[node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("3_oav3u")]
+transform = Transform3D(0.989285, -0.145997, 0, 0.145997, 0.989285, 0, 0, 0, 1, -0.0224669, 0.0362795, -0.108496)
+hand_pose = SubResource("Resource_hlxcu")
+editor_preview_mode = 1

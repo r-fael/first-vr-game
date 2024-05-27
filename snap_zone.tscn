@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dm6f4kkqj4kit"]
+
+[ext_resource type="PackedScene" uid="uid://ce7vysyvondf8" path="res://addons/godot-xr-tools/objects/snap_zone.tscn" id="1_jrh6j"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hj6u8"]
+resource_local_to_scene = true
+radius = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lpho6"]
+albedo_color = Color(0.317647, 1, 1, 0.541176)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4sv1k"]
+material = SubResource("StandardMaterial3D_lpho6")
+radius = 0.05
+height = 0.1
+
+[node name="SnapZone" instance=ExtResource("1_jrh6j")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_hj6u8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+mesh = SubResource("SphereMesh_4sv1k")
