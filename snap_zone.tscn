@@ -4,7 +4,7 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hj6u8"]
 resource_local_to_scene = true
-radius = 0.3
+radius = 0.35
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lpho6"]
 albedo_color = Color(0.317647, 1, 1, 0.541176)
@@ -15,6 +15,7 @@ radius = 0.05
 height = 0.1
 
 [node name="SnapZone" instance=ExtResource("1_jrh6j")]
+grab_distance = 0.35
 
 [node name="CollisionShape3D" parent="." index="0"]
 shape = SubResource("SphereShape3D_hj6u8")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://esxvnqwjmj1q"]
+[gd_scene load_steps=15 format=3 uid="uid://esxvnqwjmj1q"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_2gf1l"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="3_uy6y4"]
@@ -10,8 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://cchto44yigfyk" path="res://highlight.tscn" id="8_susa4"]
 [ext_resource type="PackedScene" uid="uid://dh8grd7s3n8kg" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_snap.tscn" id="9_2osoj"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gjged"]
-size = Vector3(0.1, 1.38165, 0.081)
+[sub_resource type="BoxShape3D" id="BoxShape3D_nkxfc"]
+size = Vector3(0.0577469, 0.448303, 0.0406647)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nuywg"]
+size = Vector3(0.058, 1.39838, 0.041)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hh5mf"]
 size = Vector3(0.02, 0.1, 0.01)
@@ -28,32 +31,40 @@ closed_pose = ExtResource("7_boxri")
 
 [node name="PickableObject" instance=ExtResource("1_2gf1l")]
 
-[node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(-0.0052359, 0.00174523, 0.49997, -0.158106, 0.474333, -0.00331149, -0.474315, -0.158131, -0.00441525, 0.000528501, 0.221709, -0.0827633)
-shape = SubResource("BoxShape3D_gjged")
+[node name="Area3D" type="Area3D" parent="." index="0"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(-0.0104839, 0.00386958, 0.999938, -0.315641, 0.948853, -0.00698126, -0.948821, -0.315695, -0.00872632, 0.00228452, 0.337952, -0.118728)
+shape = SubResource("BoxShape3D_nkxfc")
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(-0.0052359, 0.00174523, 0.49997, -0.158106, 0.474333, -0.00331149, -0.474315, -0.158131, -0.00441525, 0.000630818, 0.222341, -0.0798644)
+shape = SubResource("BoxShape3D_nuywg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 0.959727, 0.280935, 0, -0.280935, 0.959727, 0, 0.00145249, -0.010166)
 visible = false
 mesh = SubResource("BoxMesh_hh5mf")
 metadata/_edit_group_ = true
 
-[node name="GrabPointHandLeft" parent="." index="2" instance=ExtResource("3_uy6y4")]
-transform = Transform3D(0.986486, 0.163842, 0, -0.163842, 0.986486, 0, 0, 0, 1, 0.0224645, 0.034723, -0.1094)
+[node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("3_uy6y4")]
+transform = Transform3D(0.986486, 0.163842, 0, -0.163842, 0.986486, 0, 0, 0, 1, 0.0224645, 0.0338463, -0.1094)
 hand_pose = SubResource("Resource_j55er")
 
-[node name="GrabPointHandRight" parent="." index="3" instance=ExtResource("6_usuq5")]
+[node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("6_usuq5")]
 transform = Transform3D(0.989285, -0.145997, 0, 0.145997, 0.989285, 0, 0, 0, 1, -0.0224669, 0.0362795, -0.108496)
 hand_pose = SubResource("Resource_d2gf3")
 editor_preview_mode = 1
 
-[node name="sword_handed" parent="." index="4" instance=ExtResource("7_qnxmy")]
+[node name="sword_handed" parent="." index="5" instance=ExtResource("7_qnxmy")]
 transform = Transform3D(-0.00314518, 0.00116087, 0.299981, -0.0946924, 0.284656, -0.00209438, -0.284646, -0.0947084, -0.0026179, 0, 0, -0.00705104)
 
-[node name="XRToolsHighlightRing" parent="." index="5" instance=ExtResource("8_susa4")]
+[node name="XRToolsHighlightRing" parent="." index="6" instance=ExtResource("8_susa4")]
 
-[node name="GrabPointSnap" parent="." index="6" instance=ExtResource("9_2osoj")]
+[node name="GrabPointSnap" parent="." index="7" instance=ExtResource("9_2osoj")]
 require_group = "hand"
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 
 [editable path="sword_handed"]
 [editable path="XRToolsHighlightRing"]

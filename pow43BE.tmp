@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxpg2870drquh"]
+
+[ext_resource type="Script" path="res://toggle.gd" id="1_2e6lv"]
+[ext_resource type="Script" path="res://powers_gui.gd" id="1_e2ihe"]
+
+[sub_resource type="Theme" id="Theme_usy8h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8jna"]
+bg_color = Color(0.456838, 0.429767, 0.453033, 1)
+
+[node name="toggle" type="CanvasLayer"]
+script = ExtResource("1_e2ihe")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_right = 640.0
+offset_bottom = 360.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_usy8h")
+color = Color(0.129412, 0.172549, 0.262745, 0)
+
+[node name="pw1" type="Button" parent="ColorRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.5
+offset_top = -87.0
+offset_right = 123.5
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_c8jna")
+theme_override_styles/hover = SubResource("StyleBoxFlat_c8jna")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c8jna")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_c8jna")
+theme_override_styles/focus = SubResource("StyleBoxFlat_c8jna")
+toggle_mode = true
+script = ExtResource("1_2e6lv")
+
+[connection signal="pressed" from="ColorRect2/pw1" to="ColorRect2/pw1" method="_on_pressed"]

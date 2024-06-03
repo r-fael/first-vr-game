@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdg4mp14g3q0j"]
+
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="1_m5xgn"]
+[ext_resource type="PackedScene" uid="uid://da13ame1rhhe5" path="res://powers_gui_toggle.tscn" id="2_d0ox0"]
+
+[node name="Node3D" type="Node3D" groups=["cu"]]
+
+[node name="Viewport2Din3D" parent="." instance=ExtResource("1_m5xgn")]
+scene = ExtResource("2_d0ox0")
+viewport_size = Vector2(640, 360)

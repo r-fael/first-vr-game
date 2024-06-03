@@ -1,5 +1,7 @@
 extends Node3D
 
+@onready var player = $Player
+
 var xr_interface: XRInterface
 
 func _ready():
@@ -13,3 +15,6 @@ func _ready():
 		get_viewport().use_xr = true
 	else:
 		print("OpenXR not initialised, please check if your headset is connected")
+
+func _physics_process(delta):
+	get_tree().call_group('enemies', 'update_target_location', player.global_transform.origin)

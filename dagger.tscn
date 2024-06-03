@@ -1,0 +1,54 @@
+[gd_scene load_steps=13 format=3 uid="uid://jwvmju3qtbvv"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_a6n6h"]
+[ext_resource type="PackedScene" uid="uid://dmrm0ixs6swnm" path="res://assets2/dagger.gltf" id="2_wx7q5"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="3_rhjw3"]
+[ext_resource type="Animation" uid="uid://plad1r85f7ws" path="res://addons/godot-xr-tools/hands/animations/left/Grip.res" id="4_jolc4"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="5_djs38"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="6_sjt4i"]
+[ext_resource type="Animation" uid="uid://ccds2u22gbxn7" path="res://addons/godot-xr-tools/hands/animations/right/Grip.res" id="7_kgmhn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6efo4"]
+size = Vector3(0.103777, 0.343307, 0.0631943)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8dfos"]
+height = 0.1
+radius = 0.111402
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cjvrm"]
+size = Vector3(0.258911, 0.733765, 0.0949707)
+
+[sub_resource type="Resource" id="Resource_4ia0f"]
+script = ExtResource("5_djs38")
+open_pose = ExtResource("4_jolc4")
+closed_pose = ExtResource("4_jolc4")
+
+[sub_resource type="Resource" id="Resource_gnsgf"]
+script = ExtResource("5_djs38")
+open_pose = ExtResource("7_kgmhn")
+closed_pose = ExtResource("7_kgmhn")
+
+[node name="Dagger" instance=ExtResource("1_a6n6h")]
+
+[node name="dagger" parent="." index="0" instance=ExtResource("2_wx7q5")]
+transform = Transform3D(-1.5299e-08, 0, -0.35, 0.105299, 0.333784, -4.60278e-09, 0.333784, -0.105299, -1.45902e-08, 0.00030636, 0.0030705, -0.00593221)
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(-1.5299e-08, 0, -0.35, 0.105299, 0.333784, -4.60278e-09, 0.333784, -0.105299, -1.45902e-08, 0.000157587, -0.00450031, -0.00362084)
+shape = SubResource("BoxShape3D_6efo4")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(-1.5299e-08, 0, -0.35, 0.105299, 0.333784, -4.60278e-09, 0.333784, -0.105299, -1.45902e-08, 0.00030636, 0.0658742, -0.025745)
+shape = SubResource("CylinderShape3D_8dfos")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." index="3"]
+transform = Transform3D(-1.5299e-08, 0, -0.35, 0.105299, 0.333784, -4.60278e-09, 0.333784, -0.105299, -1.45902e-08, 0.00018429, 0.20685, -0.069141)
+shape = SubResource("BoxShape3D_cjvrm")
+
+[node name="GrabPointHandLeft" parent="." index="4" instance=ExtResource("3_rhjw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0523958, -0.096586)
+hand_pose = SubResource("Resource_4ia0f")
+
+[node name="GrabPointHandRight" parent="." index="5" instance=ExtResource("6_sjt4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0145955, 0.0523958, -0.096586)
+hand_pose = SubResource("Resource_gnsgf")

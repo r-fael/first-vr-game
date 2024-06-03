@@ -1,0 +1,57 @@
+[gd_scene load_steps=15 format=3 uid="uid://qguvhj33c5c"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_d8bnc"]
+[ext_resource type="Script" path="res://wand.gd" id="2_am4mc"]
+[ext_resource type="PackedScene" uid="uid://ik2hq4eafixg" path="res://assets2/wand.gltf" id="2_qmbwh"]
+[ext_resource type="PackedScene" uid="uid://dggl633jx3l4d" path="res://spell.tscn" id="3_6v4ey"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="3_csm25"]
+[ext_resource type="Animation" uid="uid://plad1r85f7ws" path="res://addons/godot-xr-tools/hands/animations/left/Grip.res" id="4_fft37"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="5_hrkjk"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="6_p7640"]
+[ext_resource type="Animation" uid="uid://ccds2u22gbxn7" path="res://addons/godot-xr-tools/hands/animations/right/Grip.res" id="7_osjy2"]
+[ext_resource type="AudioStream" uid="uid://grqdw0r2kq41" path="res://powerUp.wav" id="10_i3d4a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wpht1"]
+size = Vector3(0.180927, 0.971893, 0.164282)
+
+[sub_resource type="Resource" id="Resource_6qk1t"]
+script = ExtResource("5_hrkjk")
+open_pose = ExtResource("4_fft37")
+closed_pose = ExtResource("4_fft37")
+
+[sub_resource type="Resource" id="Resource_rcbpt"]
+script = ExtResource("5_hrkjk")
+open_pose = ExtResource("7_osjy2")
+closed_pose = ExtResource("7_osjy2")
+
+[sub_resource type="BoxMesh" id="BoxMesh_n2840"]
+size = Vector3(0.001, 0.001, 0.001)
+
+[node name="PickableObject" instance=ExtResource("1_d8bnc")]
+script = ExtResource("2_am4mc")
+spell = ExtResource("3_6v4ey")
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.000242309, 0.0443846, 0.000510255)
+shape = SubResource("BoxShape3D_wpht1")
+
+[node name="wand2" parent="." index="1" instance=ExtResource("2_qmbwh")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="GrabPointHandLeft" parent="." index="2" instance=ExtResource("3_csm25")]
+transform = Transform3D(1, 0, 0, 0, 0.943315, -0.331898, 0, 0.331898, 0.943315, 0.0163064, 0.0539364, -0.0750751)
+hand_pose = SubResource("Resource_6qk1t")
+
+[node name="GrabPointHandRight" parent="." index="3" instance=ExtResource("6_p7640")]
+transform = Transform3D(1, 0, 0, 0, 0.834675, -0.550743, 0, 0.550743, 0.834675, 0, 0.0710804, -0.0597615)
+hand_pose = SubResource("Resource_rcbpt")
+editor_preview_mode = 1
+
+[node name="spawpoint" type="MeshInstance3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.413582, 0)
+visible = false
+mesh = SubResource("BoxMesh_n2840")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource("10_i3d4a")
+volume_db = -30.0

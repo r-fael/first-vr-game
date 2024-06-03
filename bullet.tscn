@@ -4,27 +4,34 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwchy"]
 albedo_color = Color(1, 0.686275, 0.0313726, 1)
+metallic = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_64dqa"]
 material = SubResource("StandardMaterial3D_lwchy")
-size = Vector3(0.01, 0.01, 0.03)
+size = Vector3(0.01, 0.01, 0.05)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_wpxq0"]
-margin = 0.01
-radius = 0.01
+[sub_resource type="BoxShape3D" id="BoxShape3D_jqytw"]
+margin = 0.1
+size = Vector3(0.02, 0.02, 0.07)
 
-[node name="bullet" type="RigidBody3D"]
+[node name="bullet" type="RigidBody3D" groups=["bullet"]]
 script = ExtResource("1_tc4wm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_64dqa")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_wpxq0")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 autostart = true
 
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_jqytw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_jqytw")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

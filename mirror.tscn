@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl2mso1qnx6gp"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ckvrl"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nron7"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_ckvrl")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0nybb"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_nron7")
+
+[node name="Mirror" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 1, 0)
+mesh = SubResource("PlaneMesh_0nybb")
